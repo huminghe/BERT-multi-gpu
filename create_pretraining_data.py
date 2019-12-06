@@ -27,7 +27,7 @@ flags = tf.flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_dir", "/data1/tong.guo/1-billion-word-language-modeling-benchmark-r13output/training-monolingual.tokenized.shuffled",
+flags.DEFINE_string("input_dir", "/data1/huminghe/BERT-multi-gpu/",
                     "Input raw text file (or comma-separated list of files).")
 
 flags.DEFINE_string("input_file", "data/xab",

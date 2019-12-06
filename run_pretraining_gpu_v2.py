@@ -31,21 +31,21 @@ flags = tf.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_integer(
-    "n_gpus", 6,
+    "n_gpus", 8,
     "GPU number")
 
 ## Required parameters
 flags.DEFINE_string(
-    "bert_config_file", "bert_config.json",
+    "bert_config_file", "/data1/huminghe/BERT-multi-gpubert_config.json",
     "The config json file corresponding to the pre-trained BERT model. "
     "This specifies the model architecture.")
 
 flags.DEFINE_string(
-    "input_file", "tmp_data_128/sample1.tfrecords,tmp_data_128/sample2.tfrecords,tmp_data_128/sample3.tfrecords,tmp_data_128/sample4.tfrecords,tmp_data_128/sample5.tfrecords,tmp_data_128/sample6.tfrecords,tmp_data_128/sample7.tfrecords,tmp_data_128/sample8.tfrecords,tmp_data_128/sample9.tfrecords,tmp_data_128/sample10.tfrecords",
+    "input_file", "input/corpus7*.tfrecord",
     "Input TF example files (can be a glob or comma separated).")
 
 flags.DEFINE_string(
-    "output_dir", "output2",
+    "output_dir", "output",
     "The output directory where the model checkpoints will be written.")
 
 ## Other parameters
@@ -54,13 +54,13 @@ flags.DEFINE_string(
     "Initial checkpoint (usually from a pre-trained BERT model).")
 
 flags.DEFINE_integer(
-    "max_seq_length", 128,
+    "max_seq_length", 256,
     "The maximum total input sequence length after WordPiece tokenization. "
     "Sequences longer than this will be truncated, and sequences shorter "
     "than this will be padded. Must match data generation.")
 
 flags.DEFINE_integer(
-    "max_predictions_per_seq", 20,
+    "max_predictions_per_seq", 51,
     "Maximum number of masked LM predictions per sequence. "
     "Must match data generation.")
 
@@ -68,7 +68,7 @@ flags.DEFINE_bool("do_train", True, "Whether to run training.")
 
 flags.DEFINE_bool("do_eval", False, "Whether to run eval on the dev set.")
 
-flags.DEFINE_integer("train_batch_size", 32, "Total batch size for training.")
+flags.DEFINE_integer("train_batch_size", 256, "Total batch size for training.")
 
 flags.DEFINE_integer("eval_batch_size", 8, "Total batch size for eval.")
 
@@ -111,6 +111,8 @@ tf.flags.DEFINE_string("master", None, "[Optional] TensorFlow master URL.")
 flags.DEFINE_integer(
     "num_tpu_cores", 8,
     "Only used if `use_tpu` is True. Total number of TPU cores to use.")
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '0, 1, 2, 3, 4, 5, 6, 7'
 
 
 def model_fn_builder(bert_config, init_checkpoint, learning_rate,
