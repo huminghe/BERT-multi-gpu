@@ -36,7 +36,7 @@ flags.DEFINE_integer(
 
 ## Required parameters
 flags.DEFINE_string(
-    "bert_config_file", "/data1/huminghe/BERT-multi-gpubert_config.json",
+    "bert_config_file", "/data1/huminghe/BERT-multi-gpu/bert_config.json",
     "The config json file corresponding to the pre-trained BERT model. "
     "This specifies the model architecture.")
 
