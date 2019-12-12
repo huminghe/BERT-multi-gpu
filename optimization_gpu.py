@@ -70,6 +70,8 @@ def create_optimizer(loss, init_lr, num_train_steps, num_warmup_steps):
         epsilon=1e-6,
         exclude_from_weight_decay=["LayerNorm", "layer_norm", "bias"])
 
+    optimizer = tf.train.experimental.enable_mixed_precision_graph_rewrite(optimizer)
+
     tvars = tf.trainable_variables()
     grads = tf.gradients(loss, tvars)
 
